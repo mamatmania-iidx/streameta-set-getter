@@ -49,6 +49,7 @@ query ParticipantSet($eventSlug: String, $playerId: ID){
             }
         fullRoundText
         displayScore
+        completedAt
         
       }
     }

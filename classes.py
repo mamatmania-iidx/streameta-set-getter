@@ -72,8 +72,8 @@ class SmashGGGetter:
             return None
 
         temp = pandas.json_normalize(query_result["data"]["event"]["sets"]["nodes"])
-        temp = temp.reindex(columns= ['phaseGroup.phase.name', 'phaseGroup.displayIdentifier', 'fullRoundText', 'displayScore'])
-        arr = temp.iloc[::-1].values.tolist()
+        temp = temp.reindex(columns= ['phaseGroup.phase.name', 'phaseGroup.displayIdentifier', 'fullRoundText', 'displayScore', 'completedAt'])
+        arr = temp.sort_values(by='completedAt').values.tolist()
         return arr
 
     def get_close_participant_name(self, search_string):
@@ -94,6 +94,6 @@ class SmashGGGetter:
 
 if __name__ == "__main__":
     load_dotenv()
-    test = SmashGGGetter("tournament/couchwarriors-qld-ranking-battles-march-2021-1/event/smash-ultimate-singles")
-    print(test.get_participant_sets_with_guess("fez"))
+    test = SmashGGGetter("tournament/friday-night-smash-256/event/smash-ultimate-singles")
+    print(test.get_participant_sets_with_guess("battledolphin"))
     
