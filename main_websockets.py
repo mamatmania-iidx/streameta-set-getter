@@ -25,6 +25,7 @@ async def hello():
         try:
             async with websockets.connect("ws://streameta.com:9000") as websocket:
                 await websocket.send(os.environ["STREAMETA_TOKEN"])
+                print("ready")
 
                 #grab initial stuff
                 
@@ -32,6 +33,7 @@ async def hello():
                 p2 = api_result["teams"][1]["players"][0]["person"]["name"]
 
                 while True:
+                    
                     message = await websocket.recv()
                     await process(message)
         except:
@@ -53,15 +55,19 @@ async def process(message):
 
         if p1_new != p1:
             if p1_new:
+                print("Fetching P1 - {}".format(p1_new))
                 asyncio.gather(_grab_and_output_file(p1_new, getter, "p1_sets.txt"))
             else:
                 with open("p1_sets.txt","w+") as file:
+                    print("Clearing P1")
                     pass
         if p2_new != p2:
             if p2_new:
+                print("Fetching P2 - {}".format(p2_new))
                 asyncio.gather(_grab_and_output_file(p2_new, getter, "p2_sets.txt"))
             else:
                 with open("p2_sets.txt","w+") as file:
+                    print("Clearing P2")
                     pass
         p1 = p1_new[:]
         p2 = p2_new[:]
