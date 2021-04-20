@@ -10,6 +10,7 @@ This is a 'plugin' for Streameta, allowing you to show players' matches on strea
 * Track player names from text files (ScoreboardEdit, etc.)
 * Implement support for Challonge
 * Actual tests.
+* Possibly separate the Smash GG getter into its own thing?
 
 **Limitations**
 
