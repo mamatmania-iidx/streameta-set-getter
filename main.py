@@ -1,5 +1,5 @@
 import requests
-from classes import SmashGGGetter
+from eventgetter import SmashGGGetter
 from urllib import parse
 from dotenv import load_dotenv
 from helper import _grab_and_output_file
@@ -18,6 +18,7 @@ async def hello():
     api_result = requests.get(api).json()
     bracket_link = parse.urlparse(api_result["tournament"]["brackets"])
     # TODO: Remove Smash.GG test if new stuff is made
+    # will be handled by EventGetter in the future
     if bracket_link.hostname != "smash.gg":
         raise Exception("Currently only supports smash.gg")
     getter = SmashGGGetter(bracket_link.path.strip("/"))
