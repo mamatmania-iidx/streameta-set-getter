@@ -12,6 +12,7 @@ load_dotenv()
 api = "http://ns.streameta.com/api/?token={}".format(os.environ["STREAMETA_TOKEN"])
 p1 = ""
 p2 = ""
+max_matches = 6
 
 async def hello():
     global p1, p2, getter
@@ -57,7 +58,8 @@ async def process(message):
         if p1_new != p1:
             if p1_new:
                 print("Fetching P1 - {}".format(p1_new))
-                asyncio.gather(_grab_and_output_file(p1_new, getter, "p1_sets.txt"))
+                asyncio.gather(_grab_and_output_file(p1_new, getter,
+                "p1_sets.txt", max_matches))
             else:
                 with open("p1_sets.txt","w+") as file:
                     print("Clearing P1")
@@ -65,7 +67,8 @@ async def process(message):
         if p2_new != p2:
             if p2_new:
                 print("Fetching P2 - {}".format(p2_new))
-                asyncio.gather(_grab_and_output_file(p2_new, getter, "p2_sets.txt"))
+                asyncio.gather(_grab_and_output_file(p2_new, getter,
+                "p2_sets.txt", max_matches))
             else:
                 with open("p2_sets.txt","w+") as file:
                     print("Clearing P2")

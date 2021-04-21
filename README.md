@@ -5,6 +5,9 @@ This is a 'plugin' for Streameta, allowing you to show players' matches on strea
 * Grabs player names from your Streameta overlay and displays their recent matches.
 * Supports Smash.GG brackets (Other bracket sites coming soon)
 
+**Customizing file output**
+You can customize the output by modifying the functions that are in helper.py. I've marked the sections you need to modify, don't touch other things unless you understand what is happening with this spaghetti of a code.
+
 **Upcoming updates**
 
 * Track player names from text files (ScoreboardEdit, etc.)
