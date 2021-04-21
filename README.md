@@ -1,5 +1,7 @@
 This is a 'plugin' for Streameta, allowing you to show players' matches on stream as the tournament progresses.
 
+![Example of usage](https://i.imgur.com/YyPe9YD.png)
+
 **Features**
 
 * Grabs player names from your Streameta overlay and displays their recent matches.
@@ -17,8 +19,8 @@ You can customize the output by modifying the functions that are in helper.py. I
 
 **Limitations**
 
-Currently only works with Smash.GG, Challonge support coming soon.
-*Only supports bracket links to event, not tournament.*
+Currently only works with Smash.GG, Challonge support coming soon.  
+*Only supports bracket links to event, not tournament.*  
 May still have bugs w.r.t. Players with no games played.
 
 **How to use**
