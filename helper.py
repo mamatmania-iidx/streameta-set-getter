@@ -5,9 +5,9 @@ from difflib import get_close_matches
 def format_set_string(string, player):
     result = re.match("(.*) ([0-9]+) - (.*) ([0-9]+)", string)
     p1 = result[1]
-    p1_score = result[2]
+    p1_score = int(result[2])
     p2 = result[3]
-    p2_score = result[4]
+    p2_score = int(result[4])
 
     # Remove player crew/team
     temp = p1.split("|")
@@ -27,10 +27,19 @@ def format_set_string(string, player):
     # Modify here if you want to customize things
     if closest[0] == p1_teamless:
         # Player won
-        return "{}-{} ✔ {}".format(p1_score, p2_score, p2_teamless)
+        player_score = p1_score
+        opp_score = p2_score
+        opponent = p2_teamless
     else:
-        # Player lost
-        return "{}-{} ❌ {}".format(p2_score, p1_score, p1_teamless)
+        player_score = p2_score
+        opp_score = p1_score
+        opponent = p1_teamless
+
+    if player_score > opp_score:
+        symbol = "✔"
+    else:
+        symbol = "❌"
+    return "{} - {} {} {}".format(player_score, opp_score, symbol, opponent)
 
 round_dict = {"Quarter-Final": "Quarters",
         "Semi-Final": "Semis",
