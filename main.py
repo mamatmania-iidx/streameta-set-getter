@@ -22,7 +22,7 @@ async def hello():
     # will be handled by EventGetter in the future
     if bracket_link.hostname != "smash.gg":
         raise Exception("Currently only supports smash.gg")
-    getter = SmashGGGetter(bracket_link.path.strip("/"))
+    getter = SmashGGGetter(parse.urlunparse(bracket_link))
     while True:
         try:
             async with websockets.connect("ws://streameta.com:9000") as websocket:

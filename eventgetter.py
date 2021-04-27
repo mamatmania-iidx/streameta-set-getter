@@ -4,6 +4,7 @@ import requests
 import os
 from dotenv import load_dotenv
 from difflib import get_close_matches
+from urllib import parse
 
 # class EventGetter:
 #     @abstractmethod
@@ -12,10 +13,12 @@ from difflib import get_close_matches
 
 
 class SmashGGGetter:
-    def __init__(self, event):
-        self.slug = event
+    def __init__(self, event_url):
+        parser = parse.urlparse(event_url)
+        path = parser.path.strip("/").split("/")
+        self.slug = "/".join(path[0:4])
         self.headers = {"Authorization": "Bearer {}".format(os.environ["SMASHGG_KEY"])}
-        self.url = "https://api.smash.gg/gql/alpha"
+        self.api_url = "https://api.smash.gg/gql/alpha"
         self.participants = dict()
         self.event = ""
         self.tournament = ""
@@ -31,7 +34,7 @@ class SmashGGGetter:
             self.event = query_result["data"]["event"]["name"]
             self.tournament = query_result["data"]["event"]["tournament"]["name"]
         except:
-            raise Exception("Invalid slug.")
+            raise Exception("Invalid link.")
 
 
     def _get_participants_from_server(self):
@@ -86,7 +89,7 @@ class SmashGGGetter:
     def _run_query(self, query, variables=dict(), page=False):
         if page:
             variables["page"]=page
-        r = requests.post(self.url, json={"query":query,"variables":variables},headers=self.headers)
+        r = requests.post(self.api_url, json={"query":query,"variables":variables},headers=self.headers)
         if r.status_code == 200:
             return r.json()
         else:
