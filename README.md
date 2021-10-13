@@ -13,10 +13,9 @@ You can customize the output by modifying the functions that are in helper.py. I
 
 **Upcoming updates**
 
-* Track player names from text files (ScoreboardEdit, etc.)
+* Track player names from text files (ScoreboardEdit, etc.) and remove the Streameta requirements
 * Implement support for Challonge
 * Actual tests.
-* Possibly separate the Smash GG getter into its own thing?
 
 **Limitations**
 
